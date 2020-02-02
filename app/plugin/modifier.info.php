@@ -1,7 +1,7 @@
 <?php
 /**
  * 新闻列表
- * @return info Array
+ * @return array info
  */
 function smarty_modifier_info($ic_id, $limit) {
 	$array = array ();

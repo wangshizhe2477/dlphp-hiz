@@ -15,7 +15,7 @@ function lastUrl() {
  * 页面重定向，可以输出是否
  *
  * @param string $url
- * @param booble $b
+ * @param double $b
  * @param string $alert
  */
 function cScript($url, $b, $alert = '') {
@@ -105,7 +105,7 @@ function m($ado) {
  * @param string $photoName 图片名称
  * @param string $formName 表单获取值
  * @param string $returnNull 是否上传图片失败返回空值
- * @return 成功返回图片名称 失败返回null
+ * @return string 成功返回图片名称 失败返回null
  */
 function upload_photo($photoName = null, $formName = 'photo', $ext = 'jpg', $returnNull = false) {
 	if ($photoName == null) {

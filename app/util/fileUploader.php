@@ -84,8 +84,6 @@ class fileUploader {
 	 * 返回指定名字的上传文件对象
 	 *
 	 * @param string $name
-	 *
-	 * @return FLEA_Helper_FileUploader_File
 	 */
 	function &getFile($name) {
 		if (! isset ( $this->_files [$name] )) {
@@ -141,8 +139,6 @@ class fileUploader_File {
 	 * @param array $struct
 	 * @param string $name
 	 * @param int $ix
-	 *
-	 * @return FLEA_Helper_FileUploader_File
 	 */
 	function fileUploader_File($struct, $name, $ix = false) {
 		if ($ix !== false) {

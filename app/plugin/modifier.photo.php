@@ -2,7 +2,7 @@
 /**
  * 图文推荐
  * @param $limit 0->不限数量
- * @return photo Array
+ * @return array photo
  */
 function smarty_modifier_photo($limit = 0) {
 	$desc = 'sort_order';
