@@ -1,0 +1,40 @@
+#{assign var='title' value='友情链接'}
+
+#{if $a=='' || $a=='index'}
+<div class="t"><a href="#{url c=$c a='toEdit'}">添加#{$title}</a><b>管理中心  - #{$title}列表</b></div>
+<table class="l"> 
+<tr>
+<th width="40">排序</th>
+<th width="30">图片</th>
+<th>名称</th>
+<th>网址</th>
+<th width="30">编辑</th>
+<th width="30">删除</th>
+</tr>
+#{foreach item=item from=$obs}
+<tr>
+<td width="40px">#{adm_sort id=$item.id value=$item.sort_order}</td>
+<td align="center">#{adm_jip path=$item.photo}</td>
+<td>#{$item.name}</td>
+<td>#{$item.url}</td>
+<td align="center"><a href="#{url c=$c a='toEdit' id=$item.id}"><img src="img/adm/icon_edit.gif"/></a></td>
+<td align="center">#{adm_del id=$item.id}</td>
+</tr>
+#{/foreach} 
+</table>
+#{pager}
+
+#{elseif $a=='toEdit'}
+<div class="t"><a href="#{url c=$c}">#{$title}列表</a><b>管理中心  - 编辑#{$title}</b></div>
+<form action="#{url c=$c a='edit'}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="id" value="#{$ob.id}"/>
+#{inputlasturl}
+<table class="e">
+<tr><th>#{$title}名称：</th><td><input name="name" type="text" style="width: 400px;" value="#{$ob.name}"/></td></tr>
+<tr><th>图片(图片没有修改无须重新上传)：</th><td><input type="file" name="photo"/></td></tr>
+<tr><th>网址：</th><td><input type="text" name="url" value="#{$ob.url|default:'http://'}"/></td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+
+#{/if}

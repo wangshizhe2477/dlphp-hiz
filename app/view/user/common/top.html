@@ -1,0 +1,24 @@
+<div id="header">
+
+<div class="logo"><a href="#{url c=$c}"><img src="ext/img/user/logo.gif" height="60"></a><h3>会员中心</h3></div>
+
+<div class="link">
+你好 (#{$user.name})
+<span> | </span>
+<a href="#{url c=$c a='logoff'}">退出</a>
+<span> | </span>
+<a href="#{url}">首页</a>
+</div>
+
+<div class="nav-bar">
+<map>
+<ul class="nav-site cu-span">
+<li><a href="#{url c=$c}" class="on"><span>管理中心</span></a></li>
+<li class="line">|</li>
+<li><a href="#{url c=$c a='userEdit'}"><span>账号管理</span></a></li>
+<li class="line">|</li>
+</ul>
+</map>
+</div>
+
+</div>

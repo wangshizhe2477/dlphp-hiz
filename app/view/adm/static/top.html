@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<base href="#{$smarty.const.BASEURL}"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">   
+<style type="text/css">
+body {margin: 0px;padding: 0px;color: #192E32;background: #3C7EAE;font: 12px "sans-serif", "Arial", "Verdana";}
+#header-div {background: #3C7EAE;border-bottom: 1px solid #FFF;}
+#header-div1{color: #ffffff;height: 58px;}
+#header-div1 a{color: #FFFFFF;text-decoration: underline;cursor: pointer;}
+.t{float: left;font-size: 30px;font-weight: bold;padding-top: 10px;padding-left: 20px;}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	function outUser(){
+		if(confirm('您确定要退出系统吗？')){
+			top.location.href='#{url c='admin' a='exit'}';
+		}
+	}
+</script>
+</head>
+<body> 
+<div id="header-div"><div id="header-div1">
+<div class="t">#{$inis.name}</div> 
+<div style="float: right;margin-top: 5px;margin-right: 20px;">
+<a onclick="window.open('#{url c='adm_help' a='calc'}', '计算器', 'height=300, width=400, left=300, top=300, toolbar=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, modal=yes')">计算器</a> 
+<a href="#{url}" target="_blank">网站首页</a>
+<span id="jnkc"></span>
+<br>
+<div style="margin-top: 10px;text-align: right;">
+<a onclick="window.parent.mainframe.location=window.parent.mainframe.document.URL">刷新</a>
+<span style="margin-left: 7px;margin-right: 7px;">当前用户：#{$smarty.session.adminSession.name}</span>
+<a href="#{url c='adm_admin' a='myPass'}" target="mainframe">修改密码</a>
+<span onclick="outUser()" style="font-weight: bold;cursor: pointer">[退出]</span>
+</div>
+  </div> 
+  <div style="clear: both;"></div>
+</div></div>
+
+<script type="text/javascript">
+setInterval(function(){var myDate = new Date();$('#jnkc').text(myDate.getFullYear()+'年'+(myDate.getMonth() + 1)+'月'+myDate.getDate()+'日 '+myDate.getHours()+'时'+myDate.getMinutes()+'分'+myDate.getSeconds()+'秒 '+'星期'+'日一二三四五六'.charAt(myDate.getDay())	);} ,1000);
+</script>
+</body> 
+</html>

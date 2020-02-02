@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+#{include file='theme/common/head.html'}
+<style>
+.info_d{font-size: 12px;width: 100%;}
+.info1{height: 30px;line-height: 30px;border-bottom: 1px dashed #CCCCCC;padding-left: 7px;padding-right: 7px;}
+.info1 a{float: left;color: #7F7F7F;}
+.info1 span{float: right;color: #7F7F7F;}
+.info2{text-align: center;margin-top: 5px;}
+</style>
+</head>
+<body>
+#{include file='theme/common/top.html'}
+
+<div class="info_d">
+#{foreach item=item from=$obs}
+<div class="info1">
+<a href="#{url a='infoX' id=$item.id}" target="_blank">· #{$item.name}</a>
+<span>#{$item.createtime|date_format:'%Y-%m-%d'}</span>
+</div>
+#{/foreach}
+<div class="info2">#{pager}</div>
+</div>
+
+#{include file='theme/common/foot.html'}
+</body>
+</html>

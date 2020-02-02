@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+#{include file='theme/common/head.html'}
+<link href="ext/css/region.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+#{include file='theme/common/top.html'}
+
+
+<div class="region">
+
+<div class="reg_t">会员登陆</div>
+
+
+<div class="reg_left form-reg">
+<form action="#{url a='loginSub'}" method="post">
+
+<div class="reg_input"><label>用户名：</label><input type="text" name="name" size="22" class="input-text"/><div class="onShow">请输入用户名</div></div>
+<div class="reg_input"><label>密码：</label><input type="password" name="pass" size="22" class="input-text"/><div class="onShow">请输入密码</div></div>
+<div class="reg_sub_div"><div class="reg_login"><input type="submit" value="登陆"/></div></div>
+</form>
+</div>
+
+<div class="reg-right">
+<p>您还没有账号？<br/>立即<a href="#{url a='region'}">注册</a></p>
+</div>
+
+</div>
+
+
+#{include file='theme/common/foot.html'}
+</body>
+</html>

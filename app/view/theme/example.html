@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>#{include file='theme/common/head.html'}</head>
+<body>
+#{include file='theme/common/top.html'}
+
+#{foreach name=name item=item from=$obs}
+<div style="width: 200px;height: 240px;">
+<div><img src="#{$item.photo|pic_show}"/></div>
+<div style="height: 40px;line-height: 40px;text-align: center;">#{$item.name}</div>
+</div>
+#{/foreach}
+<div style="margin-top: 5px;text-align: center;">#{pager}</div>
+
+#{include file='theme/common/foot.html'}
+</body>
+</html>

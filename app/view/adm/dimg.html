@@ -1,0 +1,39 @@
+#{assign var='dc_id' value=$dc.id}
+#{assign var='title' value=$dc.name}
+
+#{if $a=='' || $a=='index'}
+<div class="t"><a href="#{url c=$c a='toEdit' dc_id=$dc_id}">添加新#{$title}</a><b>管理中心  - #{$title}列表</b></div>
+
+<table class="l"> 
+<tr>
+<th width="40">排序</th>
+<th width="30">图片</th>
+<th>名称</th>
+<th>链接</th>
+<th width="40">编辑</th>
+<th width="40">删除</th>
+</tr>
+#{foreach key=key item=item from=$obs}
+<tr>
+<td width="40px">#{adm_sort id=$item.id value=$item.sort_order}</td>
+<td align="center">#{adm_jip path=$item.photo}</td>
+<td>#{$item.name}</td>
+<td>#{$item.url}</td>
+<td align="center"><img src="img/adm/icon_edit.gif" onclick="url('#{url c=$c a='toEdit' id=$item.id dc_id=$dc_id}')"/></td>
+<td align="center">#{adm_del id=$item.id}</td>
+</tr>
+#{/foreach} 
+</table> 
+
+#{elseif $a=='toEdit'}
+<div class="t"><a href="#{url c=$c dc_id=$dc_id}">#{$title}列表</a><b>管理中心  - 添加新#{$title}</b></div>
+<form action="#{url c=$c a='edit' dc_id=$dc_id}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="id" value="#{$ob.id}"/>
+<table class="e">
+<tr><th>名称：</th><td><input name="name" style="width:300px;" value="#{$ob.name}"/></td></tr>
+<tr><th>链接地址：</th><td><input name="url" style="width:300px;" value="#{$ob.url|default:'http://'}"/></td></tr>
+<tr><th>图片：</th><td><input type="file" name="photo"/></td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+#{/if}

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+#{include file='theme/common/head.html'}
+<link href="ext/css/region.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+#{include file='theme/common/top.html'}
+
+<div class="region">
+
+<div class="reg_t">会员注册<span><em class="reg_num">1</em>填写信息</span></div>
+
+
+<div class="reg_left form-reg">
+<form method="post" action="#{url a='regionSub'}">
+
+<div class="reg_tip"><div><strong>注意</strong><p>请正确填写会员信息。</p></div></div>
+
+<div class="reg_input"><label>会员类型：</label><label class="reg_type" style="text-align: left;"><input type="radio" checked="checked"/> 普通会员</label></div>
+<div class="reg_input"><label>用户名：</label><input type="text" name="name" size="15" class="input-text"/><div class="onShow">请输入用户名</div></div>
+<div class="reg_input"><label>密码：</label><input type="password" name="pass" size="15" class="input-text"/><div class="onShow">请输入密码</div></div>
+<div class="reg_input"><label>确认密码：</label><input type="password" name="repass" size="15" class="input-text"/><div class="onShow">请输入确认密码</div></div>
+<div class="reg_input"><label>证件号码：</label><input type="text" name="number" size="15" class="input-text"/><div class="onShow">请输入证件号码(找回密码时使用)</div></div>
+<div class="reg_input"><label>邮箱：</label><input type="text" name="mail" size="40" class="input-text"/><div class="onShow">请输入邮箱</div></div>
+<div class="reg_input"><label>电话：</label><input type="text" name="tel" size="15" class="input-text"/><div class="onShow">请输入电话</div></div>
+<div class="reg_input"><label>地址：</label><input type="text" name="addr" size="40" class="input-text"/><div class="onShow">请输入地址</div></div>
+<div class="reg_input"><label>生日：</label><div class="form"><input type="text" name="birthday" value="" size="10" class="input-text"/><div class="onShow">请输入生日</div></div></div>
+<div class="reg_sub_div"><div class="reg_submit"><input type="submit" value="同意注册协议，提交注册"/></div></div>
+</form>
+</div>
+
+<div class="reg-right">
+<p>已经有了账号？<br/>请直接<a href="">登录</a></p>
+</div>
+
+</div>
+
+
+#{include file='theme/common/foot.html'}
+</body>
+</html>

@@ -1,0 +1,49 @@
+#{assign var='title' value='会员'}
+
+#{if $a=='' || $a=='index'}
+<div class="t"><b>管理中心  - #{$title}列表</b></div>
+<table class="l"> 
+<tr>
+<th>用户名</th>
+<th>邮箱</th>
+<th>电话</th>
+<th>地址</th>
+<th>生日</th>
+<th>证件号码</th>
+<th width="30">修改</th>
+<th width="30">锁定</th>
+<th width="30">删除</th>
+</tr>
+#{foreach item=item from=$obs}
+<tr>
+<td>#{$item.name}</td>
+<td>#{$item.mail}</td>
+<td>#{$item.tel}</td>
+<td>#{$item.addr}</td>
+<td>#{$item.birthday}</td>
+<td>#{$item.number}</td>
+<td align="center"><img src="img/adm/icon_edit.gif" onclick="url('#{url c=$c a='editTo' id=$item.id}')"/></td>
+<td align="center"><img src="img/adm/#{if $item.islock==0}no#{else}yes#{/if}.gif" onclick="cLogin('#{$item.id}','islock',this)"/></td>
+<td align="center">#{adm_del id=$item.id}</td>
+</tr>
+#{/foreach} 
+</table>
+#{pager}
+
+#{elseif $a=='editTo'}
+<div class="t"><b>管理中心  - 修改#{$title}</b><a href="#{url c=$c}">#{$title}列表</a></div>
+<form action="#{url c=$c a='edit'}" method="post">
+<input type="hidden" name="id" value="#{$ob.id}"/>
+<table class="e">
+<tr><th>用户名：</th><td><input name="name" type="text" style="width: 400px;" value="#{$ob.name}"/></td></tr>
+<tr><th>密码：</th><td><input name="pass" type="text" style="width: 400px;"/>(不修改密码，则不填写)</td></tr>
+<tr><th>邮箱：</th><td><input name="mail" type="text" style="width: 400px;" value="#{$ob.mail}"/></td></tr>
+<tr><th>电话：</th><td><input name="tel" type="text" style="width: 400px;" value="#{$ob.tel}"/></td></tr>
+<tr><th>地址：</th><td><input name="addr" type="text" style="width: 400px;" value="#{$ob.addr}"/></td></tr>
+<tr><th>生日：</th><td><input name="birthday" type="text" style="width: 400px;" value="#{$ob.birthday}"/></td></tr>
+<tr><th>证件号码：</th><td><input name="number" type="text" style="width: 400px;" value="#{$ob.number}"/></td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+
+#{/if}

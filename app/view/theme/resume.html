@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>#{include file='theme/common/head.html'}</head>
+<body>
+#{include file='theme/common/top.html'}
+
+<style type="text/css">
+.input input{border: 1px solid #000000;}
+.input textarea{border: 1px solid #000000;}
+</style>
+<form action="#{url a='resumeSub'}" method="post">
+<table width="100%" align="center" cellpadding="0" cellspacing="3" class="input">
+<tr>
+<td width="18%" height="25" align="right">应聘岗位： </td>
+<td width="77%" height="25"><input type="text" name="job" value="#{$smarty.get.job}"/></td>
+</tr>
+<tr>
+<td width="23%" height="25" align="right">姓 名：</td>
+<td width="77%" height="-6">
+<input name="name" type="text" style="font-size: 14px" size="12" maxlength="16"/></td>
+</tr>
+<tr>
+<td height="25" align="right">性 别：</td>
+<td width="77%" height="-2"><font>
+<select name="sex">
+<option value="男">男</option>
+<option value="女">女</option>
+</select>
+</font></td>
+</tr>
+<tr>
+<td height="25" align="right">出生日期：</td>
+<td width="77%" height="-1"><input name="birthday" type="text" style="font-size: 14px" size="14" maxlength="30"/>格式：1976-02-02 </td>
+</tr>
+<tr>
+<td height="25" align="right">婚姻状况：</td>
+<td width="77%" height="11">
+<select name="marriage">
+<option value="未婚">未婚</option>
+<option value="已婚">已婚</option>
+</select>
+</td>
+</tr>
+<tr>
+<td height="25" align="right">毕业院校：</td>
+<td width="77%" height="11">
+<input name="school" type="text" style="font-size: 14px" size="30" maxlength="50"/>
+</td>
+</tr>
+<tr>
+<td width="23%" height="25" align="right">学 历： </td>
+<td width="77%" height="-6"><input name="edue" type="text" style="font-size: 14px" size="10" maxlength="16"/></td>
+</tr>
+<tr>
+<td height="25" align="right">专 业：</td>
+<td width="77%" height="-3"><input name="edue" type="text" style="font-size: 14px" size="10" maxlength="30"/></td>
+</tr>
+<tr>
+<td height="25" align="right">毕业时间：</td>
+<td width="77%" height="-2"><input name="schooltime" type="text" style="font-size: 14px" size="14" maxlength="30"/>格式：1998-7月</td>
+</tr>
+<tr>
+<td height="25" align="right">电 话：</td>
+<td width="77%" height="-1">
+<input name="phone" type="text" style="font-size: 14px" size="16" maxlength="30"/></td>
+</tr>
+<tr>
+<td height="25" align="right">E-mail：</td>
+<td width="77%" height="-6"><input name="mail" type="text" style="font-size: 14px" size="20" maxlength="30"/></td>
+</tr>
+<tr>
+<td height="25" align="right">联系地址：</td>
+<td width="77%" height="-3"><input name="addr" type="text" style="font-size: 14px" size="30" maxlength="50"/></td>
+</tr>
+<tr>
+<td height="25" align="right">水平与能力：</td>
+<td width="77%" height="-2"><textarea name="other" cols="35" rows="5" style="font-size: 14px"></textarea></td>
+</tr>
+<tr>
+<td height="25" align="right">个人简历：</td>
+<td width="77%" height="-1"><textarea name="info" cols="35" rows="5" style="font-size: 14px"></textarea></td>
+</tr>
+<tr>
+<td width="23%" height="0" valign="top"></td>
+<td width="77%" height="0" valign="top">
+<input type="submit" value="提交简历"/> 
+<input type="reset" value="重写"/>
+</td></tr>
+</table>
+</form>
+
+#{include file='theme/common/foot.html'}
+</body>
+</html>

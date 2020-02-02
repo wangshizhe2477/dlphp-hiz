@@ -1,0 +1,52 @@
+#{assign var='title' value='产品分类'}
+
+#{if $a=='' || $a=='index'}
+<div class="t"><a href="#{url c=$c a='toEdit'}">录入新#{$title}</a><b>管理中心  - #{$title}列表</b></div>
+<table class="l">
+<tr>
+<th width="40">排序</th>
+<th>分类名称</th>
+<th width="30">编辑</th>
+<th width="30">删除</th>
+</tr>
+#{foreach item=item1 from=$obs}
+<tr>
+<td width="40px">#{adm_sort id=$item1.id value=$item1.sort_order}</td>
+<td>#{$item1.name}</td>
+<td align="center"><img src="img/adm/icon_edit.gif" onclick="url('#{url c=$c a='toEdit' id=$item1.id}')"/></td>
+<td align="center">#{adm_del id=$item1.id}</td>
+</tr>
+#{foreach item=item from=$item1.pcs}
+<tr>
+<td width="40px">#{adm_sort id=$item.id value=$item.sort_order}</td>
+<td>#{$item1.name}→#{$item.name}</td>
+<td align="center"><img src="img/adm/icon_edit.gif" onclick="url('#{url c=$c a='toEdit' id=$item.id}')"/></td>
+<td align="center">#{adm_del id=$item.id}</td>
+</tr>
+#{/foreach}
+#{/foreach} 
+</table>
+
+#{elseif $a=='toEdit'}
+<div class="t"><a href="#{url c=$c}">#{$title}列表</a><b>管理中心  - #{$title}编辑</b></div>
+
+<form action="#{url c=$c a='edit' id=$ob.id}" method="post">
+<table class="e">
+<tr style="display: none;">
+<th>所属类别：</th>
+<td>
+<select name="pid">
+<option value="0">一级类别</option>
+#{foreach item=item from=''|photo_cate}
+<option value="#{$item.id}">#{$item.name}</option>
+#{/foreach}
+</select>
+#{select_set name='pid' value=$ob.pid}
+</td>
+</tr>
+<tr><th>名称：</th><td><input name="name" style="width:300px;" value="#{$ob.name}"/></td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+
+#{/if}

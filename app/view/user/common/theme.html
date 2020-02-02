@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>#{include file='user/common/head.html'}</head>
+<body>
+#{include file='user/common/top.html'}
+
+<div id="memberArea">
+#{include file='user/common/left.html'}
+<div class="col-auto">
+<div class="col-auto">
+
+#{if $a==''||$a=='index'}
+<div class="col-1 member-info">
+<div class="content">
+<div class="col-left himg"><img src="ext/img/user/nophoto.gif" width="60" height="60"/></div>
+<div class="col-auto">
+<h5><font>#{$user.name}</font>（#{$user.mail}）</h5>
+<p class="blue">
+会员组：新手上路，
+账户余额：<font style="color:#F00; font-size:22px;font-family:Georgia,Arial; font-weight:700">0.00</font> 元，
+积分点数：<font style="color:#F00; font-size:12px;font-family:Georgia,Arial; font-weight:700">0</font> 点 </p>
+</div>
+</div>
+
+</div>
+<div class="bk10"></div>
+
+<div class="col-1">
+<h5 class="title">收藏夹</h5>
+<div class="content">
+
+<ul class="title-list">
+</ul>
+</div>
+</div>
+#{else}
+#{include file="user/$a.html"}
+#{/if}
+
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+#{include file='user/common/foot.html'}
+</body>
+</html>

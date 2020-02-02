@@ -1,0 +1,57 @@
+#{if $a=='' || $a=='index'}
+<div class="t"><b>管理中心  - 图片管理列表</b><a href="#{url c=$c a='addTo'}">添加管理图片</a></div>
+
+<div class="s">
+  <form action="#{url c=$c a='upload'}" method="post" enctype="multipart/form-data">
+    上传静态图片 <input type="file" name="photo" size="15" />
+    <input type="submit" value=" 上传 " class="btn1" />
+  </form>
+</div>
+
+<table class="l"> 
+<tr>
+<th width="30">图片</th>
+<th>名称</th>
+<th>图片尺寸</th>
+<th>文件名称</th>
+<th width="60px">图片替换</th>
+</tr>
+#{foreach item=item from=$obs}
+<tr>
+<td align="center">#{adm_jip path='img/'|cat:$item.file cusDir=true}</td>
+<td>#{$item.name}</td>
+<td>#{$item.width}*#{$item.height}px</td>
+<td>#{$item.file}</td>
+<td align="center"><a href="#{url c=$c a='editTo' id=$item.id}"><img src="img/adm/icon_edit.gif"/></a></td>
+</tr>
+#{/foreach} 
+</table>
+
+#{elseif $a=='addTo'}
+<div class="t"><b>管理中心  - 添加管理图片</b><a href="#{url c=$c}">图片管理列表</a></div>
+
+<form action="#{url c=$c a='add'}" method="post">
+<table class="e">
+<tr><th>名称：</th><td><input type="text" name="name"/></td></tr>
+<tr><th>宽：</th><td><input type="text" name="width" style="width: 40px;"/>px</td></tr>
+<tr><th>高：</th><td><input type="text" name="height" style="width: 40px;"/>px</td></tr>
+<tr><th>替换图片名称：</th><td><input type="text" name="file"/></td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+
+#{elseif $a=='editTo'}
+<div class="t"><b>管理中心  - 替换图片</b><a href="#{url c=$c}">图片管理列表</a></div>
+
+<form action="#{url c=$c a='edit'}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="id" value="#{$ob.id}"/>
+<table class="e">
+<tr><th>名称：</th><td>#{$ob.name}</td></tr>
+<tr><th>图片尺寸：</th><td>#{$ob.width}*#{$ob.height}px</td></tr>
+<tr><th>文件名称：</th><td>#{$ob.file}</td></tr>
+<tr><th>替换图片：</th><td><input type="file" name="photo"/></td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+ 
+#{/if}

@@ -1,0 +1,21 @@
+<div class="col-1">
+<h5 class="title">修改会员信息</h5>
+<div class="content">
+<form method="post" action="#{url c=$c a=$a}">
+<table width="100%" cellspacing="0" class="table_form">
+<tr><th width="80">真实姓名：</th><td><input name="realname" size="10" type="text" value="#{$user.realname}" class="input-text"><div class="onShow">请输入真实姓名</div></td></tr>
+<tr><th>邮箱：</th><td><input name="mail" type="text" size="40" value="#{$user.mail}" class="input-text"><div class="onShow">请输入邮箱</div></td></tr>
+<tr><th>电话：</th><td><input type="text" name="tel" value="#{$user.tel}" class="input-text"/><div class="onShow">请输入电话</div></td></tr>
+<tr><th>地址：</th><td><input type="text" name="addr" size="40" value="#{$user.addr}" class="input-text"/><div class="onShow">请输入地址</div></td></tr>
+<tr><th>传真：</th><td><input type="text" name="fax" value="#{$user.fax}" class="input-text"/><div class="onShow">请输入传真</div></td></tr>
+<tr><th>公司名称：</th><td><input type="text" name="company" value="#{$user.company}" class="input-text"/><div class="onShow">请输入公司名称</div></td></tr>
+<tr>
+<th></th>
+<td><input type="submit" value="提交" class="button"></td>
+</tr>
+</table>
+
+
+</form>
+</div>
+</div>

@@ -1,0 +1,29 @@
+#{user_tip}
+<strong class="title">注意：</strong>
+<p>带*号的字段为必填资料</p>
+#{/user_tip}
+
+
+<div class="col-1">
+<h5 class="title">收藏列表</h5>
+<div class="content">
+
+<table width="100%" cellspacing="0" class="table_form">
+<tr>
+<td>标题</td>
+<td>链接地址</td>
+<td>添加时间</td>
+<td align="center">操作</td>
+</tr>
+#{foreach item=item from=$obs}
+<tr>
+<td><a href="#{$item.url}" target="_blank">#{$item.name}</a></td>
+<td>#{$item.url}</td>
+<td>#{$item.createtime}</td>
+<td align="center"><a href="#{url c=$c a='favoriteEdit' id=$item.id}">修改</a>/<a href="#{url c=$c a='favoriteDel' id=$item.id}">删除</a></td>
+</tr>
+#{/foreach}
+</table>
+
+</div>
+#{pager}</div>

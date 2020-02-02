@@ -1,0 +1,33 @@
+#{assign var='title' value='信息分类'}
+
+#{if $a=='' || $a=='index'}
+<div class="t"><a href="#{url c=$c a='toEdit'}">录入新#{$title}</a><b>管理中心  - #{$title}列表</b></div>
+
+<table class="l"> 
+<tr>
+<th width="40px">排序</th>
+<th>分类名称</th>
+<th width="30">修改</th>
+<th width="30">删除</th>
+</tr>
+#{foreach item=item from=$obs}
+<tr>
+<td width="40px">#{adm_sort id=$item.id value=$item.sort_order}</td>
+<td>#{$item.name}</td>
+<td align="center"><a href="#{url c=$c a='toEdit' id=$item.id}"><img src="img/adm/icon_edit.gif"/></a></td>
+<td align="center">#{adm_del id=$item.id}</td>  
+</tr>
+#{/foreach} 
+</table> 
+
+#{elseif $a=='toEdit'}
+<div class="t"><a href="#{url c=$c}">#{$title}列表</a><b>管理中心  - #{$title}编辑</b></div>
+
+<form action="#{url c=$c a='edit' id=$ob.id}" method="post">
+<table class="e">
+<tr><th>名称</th><td><input name="name" value="#{$ob.name}"/></td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+
+#{/if}

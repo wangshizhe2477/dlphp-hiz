@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<base href="#{$smarty.const.BASEURL}"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+*{padding: 0;margin: 0;border: 0;}
+body {color: #192E32;background: #3C7EAE;font: 12px "sans-serif", "Arial", "Verdana";}
+a:visited, a:link, a:hover, a:active{color: #335B64;text-decoration: none;}
+#tabbar-div {background: #D5DFE8;padding-left: 10px;height: 21px;padding-top: 0px;}
+#tabbar-div p {margin: 1px 0 0 0;}
+.tab-front {background: #3C7EAE;color:#F4FAFB;line-height: 20px;font-weight: bold;padding: 4px 15px 4px 18px;border-right: 2px solid #335b64;cursor: pointer;}
+.tab-back {border:1px solid #000000;color: #333333;line-height: 20px;padding: 4px 15px 4px 18px;cursor: pointer;}
+#main-div {border: 1px solid #345C65;padding: 5px;margin: 5px;background: #FFF;}
+#menu-list ul, #menu-list2 ul{list-style-type: none;color: #335B64;}
+#menu-list li, #menu-list2 li{padding-left: 16px;line-height: 16px;cursor: pointer;}
+.explode {background: url(img/adm/menu_minus.gif) no-repeat 0px 3px;font-weight: bold;}
+.explode li{background: url(img/adm/menu_arrow.gif) no-repeat 0px 3px ;font-weight: normal;}
+.collapse {background: url(img/adm/menu_plus.gif) no-repeat 0px 3px;font-weight: bold;}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	document.getElementById('menu-list').onclick = function(e){
+		if (typeof e == "undefined") e = window.event;
+		var obj = document.all ? e.srcElement : e.target;
+		toggleCollapseExpand(obj);
+	}
+	document.getElementById('menu-list2').onclick = function(e){
+		if (typeof e == "undefined") e = window.event;
+		var obj = document.all ? e.srcElement : e.target;
+		toggleCollapseExpand(obj);
+	}
+	$('#main-div').find('a').attr('target', 'mainframe');
+});
+function toggleCollapseExpand(obj, status){
+	if (obj.tagName.toLowerCase() == 'li' && obj.className != 'menu-item'){
+		for (i = 0; i < obj.childNodes.length; i++){
+	    	if (obj.childNodes[i].tagName == "UL"){
+				if (status == null){
+					if (obj.childNodes[1].style.display != "none"){
+						obj.childNodes[1].style.display = "none";
+						obj.className = "collapse";
+					}
+					else{
+						obj.childNodes[1].style.display = "block";
+						obj.className = "explode";
+					}
+					break;
+				}
+				else{
+					if(status == "collapse")
+						obj.className = "collapse";
+					else
+						obj.className = "explode";
+					obj.childNodes[1].style.display = (status == "explode") ? "block" : "none";
+				}
+			}
+		}
+	}
+}
+function cmenu(n){
+	if(n == 1){
+		$('#menu-list2').hide();
+		$('#menu2').attr('class', 'tab-back');
+		$('#menu-list').show();
+		$('#menu1').attr('class', 'tab-front');
+	}else{
+		$('#menu-list').hide();
+		$('#menu1').attr('class', 'tab-back');
+		$('#menu-list2').show();
+		$('#menu2').attr('class', 'tab-front');
+	}
+}
+</script>
+</head>
+<body>
+<div id="tabbar-div"><p><span id="menu1" class="tab-front" onclick="cmenu('1')">管理</span><span id="menu2" class="tab-back" onclick="cmenu('2')">帮助</span></p></div>
+
+<div id="main-div">
+<div id="menu-list">
+<ul>
+<li class="explode">
+网站设置
+<ul>
+<li><a href="#{url c='adm_index' a='welcome'}">系统主页</a></li>
+<li><a href="#{url c='adm_config' t='config'}">参数设置</a></li>
+<li><a href="#{url c='adm_config' t='down'}">底部内容</a></li>
+<li><a href="#{url c='adm_picture'}">图片管理器</a></li>
+</ul>
+</li>
+<li class="explode">
+文章
+<ul>
+<li><a href="#{url c='adm_main' id=1}">文章</a></li>
+</ul>
+</li>
+<li class="explode">
+链接
+<ul>
+<li><a href="#{url c='adm_url' uc_id=1}">文字友情链接</a></li>
+<li><a href="#{url c='adm_url' uc_id=2}">文字友情链接2</a></li>
+<li><a href="#{url c='adm_urlP'}">图文友情链接</a></li>
+</ul>
+</li>
+<li class="explode">
+信息
+<ul>
+<li><a href="#{url c='adm_infoCate'}">信息分类</a></li>
+<li><a href="#{url c='adm_info'}">分类信息</a></li>
+<li><a href="#{url c='adm_infoC' ic_id=1}">固定分类信息</a></li>
+</ul>
+</li>
+<li class="explode">
+数据
+<ul>
+<li><a href="#{url c='adm_photoCate'}">图文类别</a></li>
+<li><a href="#{url c='adm_photo'}">无类别图文</a></li>
+<li><a href="#{url c='adm_photoC' pc_id=1}">图文信息(类别)</a></li>
+<li><a href="#{url c='adm_dimg' dc_id=1}">幻灯片1管理</a></li>
+<li><a href="#{url c='adm_example' ec_id=1}">工程案例</a></li>
+<li><a href="#{url c='adm_vo' vc_id=1}">视频管理1</a></li>
+<li><a href="#{url c='adm_file'}">文件管理</a></li>
+</ul>
+</li>
+<li class="explode">
+其他
+<ul>
+<li><a href="#{url c='adm_job'}">职位管理</a></li>
+<li><a href="#{url c='adm_resume'}">查看简历</a></li>
+<li><a href="#{url c='adm_message'}">查看留言</a></li>
+<li><a href="#{url c='adm_user'}">会员信息</a></li>
+</ul>
+</li>
+<li class="explode">
+商品
+<ul>
+<li><a href="#{url c='adm_goodsCate'}">商品分类</a></li>
+<li><a href="#{url c='adm_goods'}">商品信息</a></li>
+<li><a href="#{url c='adm_order'}">订单信息</a></li>
+</ul>
+</li>
+<li class="explode">
+管理员管理
+<ul>
+<li><a href="#{url c='adm_admin'}">管理员列表</a></li>
+<li><a href="#{url c='adm_admin' a='toAdd'}">添加管理员</a></li>
+</ul>
+</li>
+</ul>
+</div> 
+
+<div id="menu-list2" style="display: none;">
+<ul>
+<li class="explode">
+后台使用说明
+<ul>
+<li><a href="#{url c='adm_help' a='ward'}">注意事项</a></li>
+</ul>
+</li>
+<li class="explode">
+系统维护
+<ul>
+<li><a href="#{url c='adm_help' a='backUpTo'}">数据库备份</a></li>
+<li><a href="lib/dbadmin.php">数据库管理</a></li>
+<li><a href="#{url c='adm_help' a='upload'}">清理上传文件</a></li>
+</ul>
+</li>
+</ul>
+</div> 
+</div>
+</body> 
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+#{include file='theme/common/head.html'}
+<style>
+.mes0{text-align: center;border-collapse:collapse;border: 0px;}
+.mes0 tr{line-height: 25px;}
+.mes0 th{text-align: right;padding-right: 3px;vertical-align: top;width: 80px;}
+.mes0 td{text-align: left;padding-left: 3px;}
+.mes0 textarea{border: 1px solid #CCCCCC;height: 80px;width: 300px;}
+.mes1{border: 1px solid #CCCCCC;}
+</style>
+</head>
+<body>
+#{include file='theme/common/top.html'}
+
+#{*
+#{foreach key=key item=item from=$obs}
+<div><span>标题:</span>#{$item.name}</div>
+<div><span>内容:</span>#{$item.other}</div>
+<div><span>站长回复:</span></div>
+<div>#{$item.recontent}</div>
+#{/foreach}
+#{pager}
+*}
+
+<form action="#{url a='messageSub'}" method="post">
+<table class="mes0">
+<tr><th>公司名称：</th><td><input type="text" name="company" class="mes1" style="width: 220px;"/></td></tr>
+<tr><th>姓名：</th><td><input type="text" name="realname" class="mes1" style="width: 80px;"/></td></tr>
+<tr><th>邮箱：</th><td><input type="text" name="mail" class="mes1" style="width: 260px;"/></td></tr>
+<tr><th>电话：</th><td><input type="text" name="tel" class="mes1"/></td></tr>
+<tr><th>标题：</th><td><input type="text" name="name" class="mes1" style="width: 260px;"/></td></tr>
+<tr><th>内容：</th><td><textarea name="other"></textarea></td></tr>
+<tr><td colspan="2"><input type="submit" value="提交留言"/></td></tr>
+</table>
+</form>
+
+#{include file='theme/common/foot.html'}
+</body>
+</html>

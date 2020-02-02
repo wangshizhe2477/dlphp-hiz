@@ -1,0 +1,59 @@
+#{assign var='title' value='留言板'}
+
+#{if $a=='' || $a=='index'}
+<div class="t"><b>管理中心  - #{$title}列表</b></div>
+<table class="l"> 
+<tr>
+<th>公司名称</th>
+<th>姓名</th>
+<th>邮箱</th>
+<th>电话</th>
+<th>主题</th>
+<th width="150px">发布时间</th>
+<th width="50px">详细</th>
+<!-- <th width="50px">回复</th> -->
+<th width="30">删除</th>
+</tr>
+#{foreach item=item from=$obs}
+<tr>
+<td>#{$item.company}</td>
+<td>#{$item.realname}</td>
+<td>#{$item.mail}</td>
+<td>#{$item.tel}</td>
+<td>#{$item.name}</td>
+<td align="center">#{$item.createtime}</td>
+<td align="center"><img src="img/adm/icon_view.gif" onclick="url('#{url c=$c a='x' id=$item.id}')"/></td>
+<!-- <td align="center"><a href="#{url c=$c a='toRe' id=$item.id}">回复</a></td> -->
+<td align="center">#{adm_del id=$item.id}</td>
+</tr>
+#{/foreach}
+</table>
+#{pager}
+
+#{elseif $a=='toRe'}
+<div class="t"><a href="#{url c=$c}">#{$title}列表</a><b>管理中心  - #{$title}回复</b></div>
+
+<form action="#{url c=$c a='re'}" method="post">
+<input type="hidden" name="id" value="#{$ob.id}"/>
+<table class="e">
+<tr><th>信息标题：</th><td>#{$ob.name}</td></tr>
+<tr><th>信息内容：</th><td>#{$ob.other}</td></tr>
+<tr><th>回复内容：</th><td><textarea cols="60" rows="4" name="reother">#{$ob.reother}</textarea></td></tr>
+<tr><td colspan="2" align="center">#{adm_submit value='回复'}</td></tr> 
+</table> 
+</form>
+
+#{elseif $a=='x'}
+<div class="t"><a href="#{url c=$c}">#{$title}列表</a><b>管理中心  - #{$title}详细</b></div>
+
+<table class="e">
+<tr><th>留言时间：</th><td>#{$ob.createtime}</td></tr>
+<tr><th>公司名称：</th><td>#{$ob.company}</td></tr>
+<tr><th>姓名：</th><td>#{$ob.realname}</td></tr>
+<tr><th>邮箱：</th><td>#{$ob.mail}</td></tr>
+<tr><th>电话：</th><td>#{$ob.tel}</td></tr>
+<tr><th>标题：</th><td>#{$ob.name}</td></tr>
+<tr><th>留言内容：</th><td>#{$ob.other}</td></tr>
+</table>
+
+#{/if}

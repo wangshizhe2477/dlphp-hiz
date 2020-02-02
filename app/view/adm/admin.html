@@ -1,0 +1,61 @@
+#{if $a=='toAdd'}
+<div class="t"><a href="#{url c=$c}">管理员列表</a><b>管理中心  - 录入新管理员</b></div>
+<form action="#{url c=$c a='add'}" method="post">
+<table class="e">
+<tr><th>登陆名:</th><td><input type="text" name="name" style="width: 150px;"/></td></tr> 
+<tr><th>登陆密码:</th><td><input type="password" name="pass" style="width: 150px;"/></td></tr>
+<tr><th>确认密码:</th><td><input type="password" name="rePass" style="width: 150px;"/></td></tr>
+</table>
+<div class="but">#{adm_submit value='添加'} #{adm_reset}</div>
+</form>
+
+#{elseif $a=='index'||$a==''}
+
+<div class="t"><a href="#{url c=$c a='toAdd'}">录入新管理员</a><b>管理中心  - 管理员列表</b></div>
+<table class="l">
+<tr>
+<th>登陆名</th>
+<th>上次登陆时间</th>
+<th>上次登陆IP</th>
+<th>修改密码</th>
+<th>删除</th>
+</tr>
+#{foreach key=key item=item from=$ads}
+#{if $item.id==$smarty.session.adminSession.id}
+#{assign var='item' value=$smarty.session.adminSession}
+#{/if}
+<tr>
+<td align="center">#{$item.name}</td>
+<td align="center">#{$item.lasttime}</td>
+<td align="center">#{$item.lastip}</td>
+<td align="center"><a href="#{url c=$c a='toUpdatePass' id=$item.id}"><img src="img/adm/icon_edit.gif"/></a></td>
+<td align="center">#{adm_del id=$item.id}</td>
+</tr>
+#{/foreach} 
+</table>
+
+#{elseif $a=='toUpdatePass'}
+
+<div class="t"><a href="#{url c=$c}">管理员列表</a><b>管理中心  - 修改密码</b></div>
+<form action="#{url c=$c a='updatePass'}" method="post">
+<input type="hidden" name="id" value="#{$ob.id}"/>
+<table class="e">
+<tr><th>登陆名:</th><td><input type="text" name="name" style="width: 150px;" value="#{$ob.name}" readonly="readonly"/></td></tr> 
+<tr><th>新密码:</th><td><input type="password" name="pass" style="width: 150px;"/></td></tr>
+<tr><th>确认密码:</th><td><input type="password" name="rePass" style="width: 150px;"/></td></tr>
+</table>
+<div class="but">#{adm_submit value='修改'} #{adm_reset}</div>
+</form>
+
+#{elseif $a=='myPass'}
+
+<div class="t"><b>管理中心  - 修改密码</b></div>
+<form action="#{url c=$c a=$a}" method="post">
+<table class="e">
+<tr><th>旧密码:</th><td><input type="text" name="oldPass" style="width: 150px;"/></td></tr>
+<tr><th>新密码:</th><td><input type="text" name="pass" style="width: 150px;"/></td></tr>
+</table>
+<div class="but">#{adm_submit value='修改'} #{adm_reset}</div>
+</form>
+
+#{/if}

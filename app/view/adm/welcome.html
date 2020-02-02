@@ -1,0 +1,39 @@
+<div class="t"><b>网站管理中心</b></div>
+
+<table class="l">
+  <tr>
+    <th colspan="4" align="left" style="padding-left: 12px;">系统信息</th>
+  </tr>
+#{*  <tr>
+    <td>开发团队:</td>
+    <td><a href="http://www.feiyusoft.com" target="_blank">大连飞语技术团队</a></td>
+    <td>技术负责人:</td>
+    <td>王世哲</td>
+  </tr>
+  *}
+  <tr>
+    <td>当前用户IP:</td>
+    <td>#{$info.rip}</td>
+    <td>服务器IP:</td>
+    <td>#{$info.sip}</td>
+  </tr>
+    
+  <tr>
+    <td width="20%">服务器操作系统:</td>
+    <td width="30%">#{$info.os}</td>
+    <td width="20%">Web 服务器:</td>
+    <td width="30%">#{$info.service}</td>
+  </tr>
+  <tr>
+    <td>PHP 版本:</td>
+    <td>#{$info.php}</td>
+    <td>MySQL 版本:</td>
+    <td>#{$info.mysql}</td>
+  </tr>
+  <tr>
+    <td>文件上传的最大大小:</td>
+    <td>#{$info.upload}</td>
+    <td>编码:</td>
+    <td>UTF-8</td>
+  </tr>
+</table>

@@ -1,0 +1,15 @@
+1.3.2
+增加：返回头部插件
+修改：controller->file引用文件错误
+
+1.3.3
+修改：function.editor.php数据效验
+
+1.3.4
+修改：jquery-hiz.js重构
+修改：adm->login
+
+1.3.5
+增加：findpass
+增加：fm
+重构：ext目录结构

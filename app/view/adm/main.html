@@ -1,0 +1,12 @@
+#{assign var='title' value=$ob.name}
+<div class="t"><b>管理中心  - 编辑#{$title}</b></div>
+<script type="text/javascript" src="lib/kindeditor/kindeditor.js"></script>
+
+<form action="#{url c=$c a='edit'}" method="post">
+<input type="hidden" name="id" value="#{$ob.id}"/>
+<table class="e">
+<tr><th>标题：</th><td><input type="text" name="name" value="#{$ob.name}" class="text"/></td></tr>
+<tr><th>详细：</th><td>#{editor value=$ob.other}</td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>

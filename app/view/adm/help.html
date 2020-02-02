@@ -1,0 +1,253 @@
+#{if $a=='ward'}
+
+<table style="background:#fff;border:1px solid #000000;text-align: left;line-height: 25px;width: 100%;">
+<tr><th style="text-align: center;font-size: 20px;height: 40px;line-height: 40px;color: #000000;">网站后台管理的注意事项</th></tr>
+<tr><th>1.初次使用后台使，最好重新设置管理员帐号，密码，设置后不要把帐号信息告诉他人；</th></tr>
+<tr><th>2.上传图片后，预览时没反应:请在前台刷新后看效果；</th></tr>
+<tr><th>3.Word文档拷入在线编辑器的内容,请注意清除垃圾代码,否则可能会出现显示现象；</th></tr>
+<tr><th>4.使用后台上传的文字是从其它地方复制过来的，应注意先清除文字原有样式，可将文字先复制到文本文档中，再把文字复制到后台中进行编辑排版；</th></tr>
+<tr><th>5.上传图片，要注意图片的格式（最好是.jpg、.gif格式的），图片的大小最好在100Kb以下，图片过大可能会出现上传不上去的现象；</th></tr>
+<tr><th>6.删除分类时，应先确认此分类下没有任何内容，否则会出现前台有此内容而后台却找不到相关信息；</th></tr>
+<tr><th>7.后台默认上传上去的宋体、12号或14号字；</th></tr>
+</table>
+
+#{elseif $a=='backUpTo'}
+<div class="t"><b>管理中心  - 数据库备份</b></div>
+<div class="tip">(提示：在不了解该功能的情况下，请不要操作！)</div>
+<table class="l"> 
+<tr><th width="40px">删除</th><th>备份文件名称</th></tr>
+#{foreach item=item from=$fis}
+<tr>
+<td align="center"><img src="img/adm/icon_drop.gif" title="删除" onclick="isDel('#{url c=$c a='backUpDel' name=$item|truncate_cn:'26':true:''}')"/></td>
+<td>#{$item|truncate_cn:'26':true:''}</td>
+</tr>
+#{/foreach} 
+</table> 
+<div><input type="button" value=" 开始备份 " onclick="url('#{url c=$c a='backUp'}')" class="btn1"/></div>
+
+#{elseif $a=='upload'}
+<div class="t"><b>管理中心  - 清理上传文件</b></div>
+
+<div class="tip">(提示：没有特殊情况无需执行该操作，文件删除后将无法找回，请确认后再删除！)</div>
+<table class="l">
+<tr>
+<th>文件名称</th>
+<th>文件格式</th>
+<th>文件大小</th>
+<th>查看文件</th>
+<th>删除</th>
+</tr>
+#{foreach key=key item=item from=$fis}
+<tr>
+<td align="center">#{$item.name}</td>
+<td align="center">#{$item.type}</td>
+<td align="center">#{$item.size}</td>
+<td align="center"><a href="lib/kindeditor/attached/#{$item.fulname}" target="_blank"><img src="img/adm/icon_view.gif"/></a></td>
+<td align="center"><img src="img/adm/icon_drop.gif" title="删除" onclick="isDel('#{url c=$c a='uploadDel' fulname=$item.fulname}')"/></td>
+</tr>
+#{/foreach}
+</table>
+
+#{elseif $a=='calc'}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<title>计算器 </title>
+<style type="text/css"> 
+body, div, input {font: 12px arial;}
+.calculatorButton {text-align: center;width: 73px;}
+.calculatorButton2 {text-align: center;width: 154px;}
+*+html .calculatorButton2 {width: 157px;}
+#calculator .buttonArea {padding: 3px;border-color: #455690 #a6b4cf #a6b4cf #455690 ;border-style: solid;border-width: 1px;}
+#calculatorOutput {padding: 2px; border:2px inset; margin: 2px;}
+#topbar{position:absolute;border-right: #455690 1px solid;border-top: #a6b4cf 1px solid;border-left: #a6b4cf 1px solid;border-bottom: #455690 1px solid;background-color: #c9d3f3;width: 300px;visibility: hidden;z-index: 99999;filter: progid:DXImageTransform.Microsoft.BasicImage(opacity=.65);opacity: 0.65;}
+</style> 
+<script type="text/javascript"> 
+  <!--
+  var Calculator = Object();
+ 
+  Calculator.result = 0;
+  Calculator.current = '';
+  Calculator.values = 0;
+  Calculator.handle = '';
+ 
+  Calculator.elem = function(){return document.getElementById('calculator');};
+  Calculator.output = function() {return document.getElementById('calculatorOutput');}
+ 
+  Calculator.input = function(n)
+  {
+    if (n == "."&& Calculator.current.toString().indexOf('.')>=0)
+    {
+      return;
+    }
+    var output = Calculator.output();
+ 
+    if (Calculator.current == "0" && n != ".") Calculator.current = '';
+ 
+    Calculator.current += "" + n;
+ 
+    output.innerHTML = Calculator.current;
+  }
+ 
+  Calculator.backspace = function()
+  {
+    var output = Calculator.output();
+    output.innerHTML = output.innerHTML.length > 1 ? output.innerHTML.substr(0, output.innerHTML.length-1) : 0;
+ 
+    Calculator.current = output.innerHTML;
+  }
+ 
+  Calculator.clear = function()
+  {
+    Calculator.result = 0;
+    Calculator.current = '';
+    Calculator.values = 0;
+    Calculator.handle = '';
+ 
+    var output = Calculator.output();
+    output.innerHTML = "0";
+  }
+ 
+  Calculator.calculate = function(p)
+  { 
+    if (Calculator.handle != '' && Calculator.values != '' && Calculator.current != '')
+    {
+      try
+      {
+        var value = eval(Calculator.values + Calculator.handle + Calculator.current)
+        Calculator.values = value == 'Infinity' ? 0 : value;
+        Calculator.output().innerHTML  = Calculator.values
+      }
+      catch (e)
+      {
+        alert(e);
+      }
+    }
+    else
+    {
+      Calculator.values = Calculator.current=='' ? Calculator.values : Calculator.current;
+    }
+ 
+    if (p == '=')
+    {
+      Calculator.output().innerHTML = Calculator.values == '' ? '0' : Calculator.values;
+      Calculator.current = Calculator.values;
+      Calculator.handle = '';
+    }
+    else
+    {
+      Calculator.handle = p;
+    }
+ 
+    Calculator.current = '';
+  }
+ 
+  onload = function() {
+    window.focus();
+  }
+  //-->
+  </script> 
+  
+ </head> 
+ 
+ <body style="background:buttonFace"> 
+    <div class="buttonArea"> 
+      <div id="calculatorOutput" style="width:95%; text-align:right;border:2px inset;background:#FFF;">0</div> 
+      <table width="100%"> 
+      <tr> 
+        <td colspan="2"><input type="button" class="calculatorButton2" value="清除" onclick="Calculator.clear()" /></td> 
+        <td colspan="2"><input type="button" class="calculatorButton2" value="退格" onclick="Calculator.backspace()" /></td> 
+      </tr> 
+      <tr> 
+        <td><input class="calculatorButton" type="button" value="7" onclick="Calculator.input(7)" /></td> 
+        <td><input type="button" value="8" class="calculatorButton" onclick="Calculator.input(8)" /></td> 
+        <td><input type="button" value="9" class="calculatorButton" onclick="Calculator.input(9)" /></td> 
+        <td><input type="button" value="/" class="calculatorButton" onclick="Calculator.calculate('/')" /></td> 
+      </tr> 
+      <tr> 
+        <td><input type="button" value="4" class="calculatorButton" onclick="Calculator.input(4)" /></td> 
+        <td><input type="button" value="5" class="calculatorButton" onclick="Calculator.input(5)" /></td> 
+        <td><input type="button" value="6" class="calculatorButton" onclick="Calculator.input(6)" /></td> 
+        <td><input type="button" value="*" class="calculatorButton" onclick="Calculator.calculate('*')" /></td> 
+      </tr> 
+      <tr> 
+        <td><input type="button" value="1" class="calculatorButton" onclick="Calculator.input(1)" /></td> 
+        <td><input type="button" value="2" class="calculatorButton" onclick="Calculator.input(2)" /></td> 
+        <td><input type="button" value="3" class="calculatorButton" onclick="Calculator.input(3)" /></td> 
+        <td><input type="button" value="-" class="calculatorButton" onclick="Calculator.calculate('-')" /></td> 
+      </tr> 
+      <tr> 
+        <td><input type="button" value="0" class="calculatorButton" onclick="Calculator.input(0)" /></td> 
+        <td><input type="button" value="." class="calculatorButton" onclick="Calculator.input('.')" /></td> 
+        <td><input type="button" value="=" class="calculatorButton" onclick="Calculator.calculate('=')" /></td> 
+        <td><input type="button" value="+" class="calculatorButton" onclick="Calculator.calculate('+')" /></td> 
+      </tr> 
+      <tr> 
+        <td height="38">&nbsp;</td> 
+        <td colspan="2"><div align="center"><a href="#" onclick="top.close()">关闭窗口</a></div></td> 
+        <td>&nbsp;</td> 
+      </tr> 
+      </table> 
+    </div> 
+ </body> 
+ 
+<script type="text/javascript"> 
+ <!--
+  document.onkeyup = function(e)
+  {
+    var evt = Utils.fixEvent(e);
+ 
+    if ((evt.keyCode >= 48 && evt.keyCode <= 57 && !evt.shiftKey) ||
+        (evt.keyCode >= 96 && evt.keyCode <= 105 && !evt.shiftKey))
+    {
+      if (evt.keyCode > 57)
+      {
+        Calculator.input(evt.keyCode - 96);
+      }
+      else
+      {
+        Calculator.input(evt.keyCode - 48);
+      }
+    }
+    else if ((evt.keyCode == 107 && !evt.shiftKey) || (evt.keyCode == 61 && evt.shiftKey) || (evt.keyCode == 187 && evt.shiftKey))
+    {
+      Calculator.calculate('+');
+    }
+    else if ((evt.keyCode == 109 && !evt.shiftKey) || (evt.keyCode == 189 && !evt.shiftKey))
+    {
+      Calculator.calculate('-');
+    }
+    else if ((evt.keyCode == 106 && !evt.shiftKey) || (evt.keyCode == 56 && evt.shiftKey))
+    {
+      Calculator.calculate('*');
+    }
+    else if ((evt.keyCode == 111 && !evt.shiftKey) || (evt.keyCode == 191 && !evt.shiftKey))
+    {
+      Calculator.calculate('/');
+    }
+    else if (evt.keyCode == 13 || (evt.keyCode == 61 && !evt.shiftKey) || (evt.keyCode == 187 && !evt.shiftKey))
+    {
+      Calculator.calculate('=');
+    }
+    else if ((evt.keyCode == 110 && !evt.shiftKey) || (evt.keyCode == 190 && !evt.shiftKey))
+    {
+        Calculator.input('.');
+    }
+    else if (evt.keyCode == 27)
+    {
+      Calculator.clear();
+    }
+    else if (evt.keyCode == 8)
+    {
+      Calculator.backspace();
+    }
+ 
+    return false;
+ 
+  }
+  
+ //-->
+ </script> 
+</html> 
+
+#{/if}

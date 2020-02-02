@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+#{include file='theme/common/head.html'}
+<link href="ext/css/cart.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="w">
+#{include file='theme/common/top.html'}
+
+<div class="flowBox">
+    <h6><span>商品列表</span></h6>
+        <form id="formCart" name="formCart" method="post" action="flow.php">
+           <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tbody><tr>
+              <th bgcolor="#ffffff">商品名称</th>
+                    <th bgcolor="#ffffff">属性</th>
+                                          <th bgcolor="#ffffff">市场价</th>
+                            <th bgcolor="#ffffff">本店价</th>
+              <th bgcolor="#ffffff">购买数量</th>
+              <th bgcolor="#ffffff">小计</th>
+              <th bgcolor="#ffffff">操作</th>
+            </tr>
+                        <tr>
+              <td bgcolor="#ffffff" align="center">
+                                                      <a href="goods.php?id=9" target="_blank"><img src="images/200905/thumb_img/9_thumb_G_1241511871555.jpg" border="0" title="诺基亚E66"></a><br>
+                    <a href="goods.php?id=9" target="_blank" class="f6">诺基亚E66</a>
+                                                                                    </td>
+                            <td bgcolor="#ffffff">颜色:白色 <br>
+</td>
+                                          <td align="right" bgcolor="#ffffff">￥2757.60元</td>
+                            <td align="right" bgcolor="#ffffff">￥2298.00元</td>
+              <td align="right" bgcolor="#ffffff">
+                                <input type="text" name="goods_number[43]" id="goods_number_43" value="1" size="4" class="inputBg" style="text-align:center " onkeydown="showdiv(this)">
+                              </td>
+              <td align="right" bgcolor="#ffffff">￥2298.00元</td>
+              <td align="center" bgcolor="#ffffff">
+                <a href="javascript:if (confirm('您确实要把该商品移出购物车吗？')) location.href='flow.php?step=drop_goods&id=43';" class="f6">删除</a>
+                                <a href="javascript:if (confirm('您确实要把该商品移出购物车吗？')) location.href='flow.php?step=drop_to_collect&id=43';" class="f6">放入收藏夹</a>
+                            </td>
+            </tr>
+                        <tr>
+              <td bgcolor="#ffffff" align="center">
+                                                      <a href="goods.php?id=17" target="_blank"><img src="images/200905/thumb_img/17_thumb_G_1241969394587.jpg" border="0" title="夏新N7"></a><br>
+                    <a href="goods.php?id=17" target="_blank" class="f6">夏新N7</a>
+                                                                                    </td>
+                            <td bgcolor="#ffffff">颜色:黑色 <br>
+</td>
+                                          <td align="right" bgcolor="#ffffff">￥2760.00元</td>
+                            <td align="right" bgcolor="#ffffff">￥2300.00元</td>
+              <td align="right" bgcolor="#ffffff">
+                                <input type="text" name="goods_number[44]" id="goods_number_44" value="1" size="4" class="inputBg" style="text-align:center " onkeydown="showdiv(this)">
+                              </td>
+              <td align="right" bgcolor="#ffffff">￥2300.00元</td>
+              <td align="center" bgcolor="#ffffff">
+                <a href="javascript:if (confirm('您确实要把该商品移出购物车吗？')) location.href='flow.php?step=drop_goods&id=44';" class="f6">删除</a>
+                                <a href="javascript:if (confirm('您确实要把该商品移出购物车吗？')) location.href='flow.php?step=drop_to_collect&id=44';" class="f6">放入收藏夹</a>
+                            </td>
+            </tr>
+                      </tbody></table>
+          <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tbody><tr>
+              <td bgcolor="#ffffff">
+                            购物金额小计 ￥4598.00元，比市场价 ￥5517.60元 节省了 ￥919.60元 (17%)              </td>
+              <td align="right" bgcolor="#ffffff">
+                <input type="button" value="清空购物车" class="bnt_blue_1" onclick="location.href='flow.php?step=clear'">
+                <input name="submit" type="submit" class="bnt_blue_1" value="更新购物车">
+              </td>
+            </tr>
+          </tbody></table>
+          <input type="hidden" name="step" value="update_cart">
+        </form>
+        <table width="99%" align="center" border="0" cellpadding="5" cellspacing="0" bgcolor="#dddddd">
+          <tbody><tr>
+            <td bgcolor="#ffffff"><a href="./"><img src="themes/default/images/continue.gif" alt="continue"></a></td>
+            <td bgcolor="#ffffff" align="right"><a href="flow.php?step=checkout"><img src="themes/default/images/checkout.gif" alt="checkout"></a></td>
+          </tr>
+        </tbody></table>
+                     <script type="text/javascript" charset="utf-8">
+        function collect_to_flow(goodsId)
+        {
+          var goods        = new Object();
+          var spec_arr     = new Array();
+          var fittings_arr = new Array();
+          var number       = 1;
+          goods.spec     = spec_arr;
+          goods.goods_id = goodsId;
+          goods.number   = number;
+          goods.parent   = 0;
+          Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), collect_to_flow_response, 'POST', 'JSON');
+        }
+        function collect_to_flow_response(result)
+        {
+          if (result.error > 0)
+          {
+            // 如果需要缺货登记，跳转
+            if (result.error == 2)
+            {
+              if (confirm(result.message))
+              {
+                location.href = 'user.php?act=add_booking&id=' + result.goods_id;
+              }
+            }
+            else if (result.error == 6)
+            {
+              openSpeDiv(result.message, result.goods_id);
+            }
+            else
+            {
+              alert(result.message);
+            }
+          }
+          else
+          {
+            location.href = 'flow.php';
+          }
+        }
+      </script>
+  </div>
+
+#{include file='theme/common/foot.html'}
+</div>
+</body>
+</html>

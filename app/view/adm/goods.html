@@ -1,0 +1,85 @@
+#{assign var='title' value='商品信息'}
+
+#{if $a=='' || $a=='index'}
+<div class="t"><a href="#{url c=$c a='toEdit'}">录入新#{$title}</a><b>管理中心  - #{$title}列表</b></div>
+
+<div class="s">
+<form action="index.php" method="get">
+<input type="hidden" name="c" value="#{$c}"/>
+所属类别：
+<select name="gc_idsea">
+<option value="">所有类别</option>
+#{foreach item=item1 from=$gcs}
+#{foreach item=item from=$item1.gcs}
+<option value="#{$item.id}">#{$item1.name}→#{$item.name}</option>
+#{/foreach}
+#{/foreach}
+</select>
+<input type="submit" value=" 搜索 " class="btn1" />
+</form>
+</div>
+
+<table class="l">
+<tr>
+<th width="40">排序</th>
+<th width="30">图片</th>
+<th>所属类别</th>
+<th>商品名称</th>
+<th>商品型号</th>
+<th>单价</th>
+<th width="30">下架</th>
+<th width="30">推荐</th>
+<th width="30">最新</th>
+<th width="30">热门</th>
+<th width="30">编辑</th>
+<th width="30">删除</th>
+</tr>
+#{foreach item=item from=$obs}
+<tr>
+<td width="40px">#{adm_sort id=$item.id value=$item.sort_order}</td>
+<td align="center">#{adm_jip path=$item.photo}</td>
+<td>#{$item.gc.name}</td>
+<td>#{$item.name}</td>
+<td>#{$item.model}</td>
+<td>#{$item.price}(元)</td>
+<td align="center"><img src="img/adm/#{if $item.ilock==0}no#{else}yes#{/if}.gif" onclick="cLogin('#{$item.id}','ilock',this)"/></td>
+<td align="center"><img src="img/adm/#{if $item.up==0}no#{else}yes#{/if}.gif" onclick="cLogin('#{$item.id}','up',this)"/></td>
+<td align="center"><img src="img/adm/#{if $item.new==0}no#{else}yes#{/if}.gif" onclick="cLogin('#{$item.id}','new',this)"/></td>
+<td align="center"><img src="img/adm/#{if $item.hot==0}no#{else}yes#{/if}.gif" onclick="cLogin('#{$item.id}','hot',this)"/></td>
+<td align="center"><a href="#{url c=$c a='toEdit' id=$item.id}"><img src="img/adm/icon_edit.gif"/></a></td>
+<td align="center">#{adm_del id=$item.id}</td>
+</tr>
+#{/foreach} 
+</table> 
+#{pager}
+
+#{elseif $a=='toEdit'}
+<div class="t"><a href="#{url c=$c}">#{$title}列表</a><b>管理中心  - #{$title}编辑</b></div>
+<script type="text/javascript" src="lib/kindeditor/kindeditor.js"></script>
+
+<form action="#{url c=$c a='edit'}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="id" value="#{$ob.id}"/>
+#{inputlasturl}
+<table class="e">
+<tr><th>缩略图：</th><td><input type="file" name="photo"/></td></tr>
+<tr><th>名称：</th><td><input type="text" name="name" value="#{$ob.name}"/></td></tr>
+<tr><th>型号：</th><td><input type="text" name="model" value="#{$ob.model}"/></td></tr>
+<tr><th>单价：</th><td><input type="text" name="price" value="#{$ob.price}" style="width: 60px;"/>(元)</td></tr>
+<tr><th>类别：</th><td>
+<select name="gc_id">
+#{foreach item=item1 from=$gcs}
+<optgroup label="#{$item1.name}">
+#{foreach item=item from=$item1.gcs}
+<option value="#{$item.id}">#{$item.name}</option>
+#{/foreach}
+</optgroup>
+#{/foreach}
+</select>
+#{select_set name='gc_id' value=$ob.gc_id}
+</td></tr>
+<tr><th>详细：</th><td>#{editor value=$ob.other}</td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+
+#{/if}

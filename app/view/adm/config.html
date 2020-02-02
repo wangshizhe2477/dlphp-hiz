@@ -1,0 +1,30 @@
+#{assign var='t' value=$smarty.request.t}
+
+#{if $t=='config'}
+<div class="t"><b>管理中心  - 参数设置</b></div>
+
+<form action="#{url c=$c a='edit'}" method="post">
+<table class="e"> 
+<tr><th>项目名称：</th><td><input type="text" class="text" name="name" value="#{$inis.name}"/></td></tr>
+<tr><th>网址：</th><td><input type="text" class="text" name="web" value="#{$inis.web}"/></td></tr>
+<tr><th>网站标题：</th><td><input type="text" class="text" name="title" value="#{$inis.title}"/></td></tr>
+<tr><th>网站默认关键字：</th><td><input type="text" class="text" name="keywords" value="#{$inis.keywords}"/></td></tr>
+<tr><th>网站默认描述：</th><td><input type="text" class="text" name="description" value="#{$inis.description}"/></td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+
+
+#{elseif $t=='down'}
+
+<div class="t"><b>管理中心  - 网站底部内容</b></div>
+
+<script type="text/javascript" src="lib/kindeditor/kindeditor.js"></script>
+<form action="#{url c=$c a='edit'}" method="post">
+<table class="e"> 
+<tr><th>网站底部内容：</th><td>#{editor name='down' value=$inis.down model=2}</td></tr>
+</table>
+<div class="but">#{adm_submit} #{adm_reset}</div>
+</form>
+
+#{/if}
